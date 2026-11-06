@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "express";
+import cors from "cors";
 import "dotenv/config";
 import fs from "fs";
 import path from "path"; 
@@ -27,7 +27,7 @@ app.get("/health",(req,res)=>{
 
 if(fs.existsSync(publicDir)){
     app.use(express.static(publicDir));
-    app.get("/{*any}",(req,res,next)=>{
+    app.get("*",(req,res,next)=>{
         res.sendFile(path.join(publicDir, "index.html"), (err) => next(err));
     })
 }
